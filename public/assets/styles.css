@@ -1,0 +1,60 @@
+/* nav styles */
+.navbar-brand {
+    text-decoration: none;
+    color: white;
+}
+
+.nav-link {
+    color: white;
+}
+
+
+/* index - fish, bug, sea button styles */
+.button {
+    padding: 0;
+    margin: 0;
+}
+
+.selector {
+    width: 100%;
+}
+
+.jumbotron {
+    font-family: 'Fredoka One', cursive;
+}
+
+
+/* Card styles */
+.card {
+    margin-bottom: 20px;
+    font-family: 'Tajawal', sans-serif;
+    color: black;
+}
+
+.card:hover {
+    position: relative;
+    top: -5px;
+    left: -5px;
+    box-shadow: 5px 5px #ccc;
+}
+
+.card-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    
+}
+
+.card-img-top {
+    max-height: 150px;
+    max-width: 150px;
+}
+
+.card-body {
+    padding: 0;
+}
+
+.list-group-item {
+    padding: 0;
+}

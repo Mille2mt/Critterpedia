@@ -1,0 +1,32 @@
+<%- include('partials/header') %>
+
+<div class="container jumbotron text-center">
+    <h1>The Fish page!</h1>
+    <a href="/critters" class="btn btn-primary btn-md">Go back</a>
+</div>
+
+<div class="container card-holder">
+    <div class='row' style='flex-wrap:wrap;'>
+        <% for (let i = 0; i < fish.length; i++) { %>
+            <div class="col-md-3 col-sm-6">
+                <a class='text-decoration-none' href="/critters/fish/<%= fish[i].name %>">
+                    <div class="card text-center">
+                        <h5 class="card-title"><%= fish[i].name.charAt(0).toUpperCase() + fish[i].name.slice(1).replace('_', ' ') %></h5>                        
+                        <div class="card-body">
+                            <img src="<%= fish[i].icon %>" class="card-img-top" alt="...">
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><%= fish[i].location %></li>
+                            <li class="list-group-item"><%= fish[i].time === '' ? 'All Day' : fish[i].time %></li>
+                        </ul>
+                    </div>
+                </a>
+            </div>
+        <% } %>   
+    </div>  
+</div>
+
+
+
+
+<%- include('partials/footer') %>

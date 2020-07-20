@@ -4,53 +4,44 @@
     <header class="jumbotron">
         <div class="container">
             <h1>Welcome to our Critters page!</h1>
-            <p>View our lovely selection of bugs and fish!</p>
-            <p>
-                <a class='btn btn-lg btn-primary'>Let's see em!</a>
-            </p>
+            <p>View our lovely selection of bugs and fish!</p>            
             <a href="/">Go back.</a> 
         </div>               
     </header>
+</div>
 
-    <div class='selector'>
-        <a href="" class="col-md-4 col-xs-12 btn btn-primary btn-lg">Fish</a>
-        <a href="" class="col-md-4 col-xs-12 btn btn-success btn-lg">Bugs</a>
-        <a href="" class="col-md-4 col-xs-12 btn btn-info btn-lg">Sea Creatures</a> 
+<div class="container mb-5">
+    <div class="row justify-content-around">
+        <a href="/critters/fish" class='col-md-3'><button class='btn btn-primary btn-lg selector'>Fish</button></a>   
+        <a href="/critters/bugs" class='col-md-3'><button class='btn btn-success btn-lg selector'>Bugs</button></a>   
+        <a href="/critters/seaCreatures" class='col-md-3'><button class='btn btn-info btn-lg selector'>Sea</button></a>    
+    </div>
+</div>
+
+    <!-- Make functional -->
+<!-- <div class="container">
+    <div class="row justify-content-center">
+        <form action="GET">
+            <div class="form-inline text-center my-auto">
+                <input class='form-control col-md-8 col-xs-12' type="text" name='search' placeholder='search'>
+                <button href ='#' class='col-md-4 col-xs-12 btn btn-lg btn-dark float-right'>Submit!</button>
+            </div>  
+        </form>    
+    </div>   
+</div> -->
+
+    <div class="container">
+        <h2 class="text-center">Critters leaving this month</h2>
+        <h4>Bugs</h4>
+        <h4>Fish</h4>
+        <h4>Sea Creatures</h4>
     </div>
 
-    <div>
-        <form action="GET">
-            <div class="form-inline text-center">
-                <input class='form-control' type="text" name='search' placeholder='search'>
-                <button class='btn btn-lg btn-dark float-right'>Submit!</button>
-            </div>  
-        </form>
-    </div>    
-
-    <div class='row' style='flex-wrap:wrap;'>
-        <% for (let i = 0; i < 16; i++) { %>
-            <div class="col-md-3 col-sm-6">
-                <a href="/critters/<%= fish[i].name %>">
-                    <div class="thumbnail">
-                        <img src="<%= fish[i].icon %>" alt="Icon">
-                        <div class="caption text-center">
-                            <h4><%= fish[i].name.charAt(0).toUpperCase() + fish[i].name.slice(1).replace('_', ' ') %></h4>
-                            <p><%= fish[i].location %></p>
-                            <% if (fish[i].time === '') { %>
-                                <p>All day</p>
-                            <% } else { %>
-                                <p><%= fish[i].time %></p>
-                            <% } %>                            
-                        </div>
-                    </div>
-                </a>
-            </div>
-        <% } %>
-
-        
-        
-    </div>   
-    
-</div>
+    <div class="container">
+        <h2 class="text-center">New Critters this month</h2>
+        <h4>Bugs</h4>
+        <h4>Fish</h4>
+        <h4>Sea Creatures</h4>
+    </div>
 
 <%- include('partials/footer') %>

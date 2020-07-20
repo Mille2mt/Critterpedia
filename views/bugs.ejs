@@ -1,0 +1,31 @@
+<%- include('partials/header') %>
+
+<div class="container jumbotron text-center">
+    <h1>The Bugs page!</h1>
+    <a href="/critters" class="btn btn-primary btn-md">Go back</a>
+</div>
+
+<div class="container">
+    <div class='row' style='flex-wrap:wrap;'>
+        <% for (let i = 0; i < bugs.length; i++) { %>
+            <div class="col-md-3 col-sm-6">
+                <a href="/critters/bugs/<%= bugs[i].name %>">
+                    <div class="thumbnail">
+                        <img src="<%= bugs[i].icon %>" alt="Icon">
+                        <div class="caption text-center">
+                            <h4><%= bugs[i].name.charAt(0).toUpperCase() + bugs[i].name.slice(1).replace('_', ' ') %></h4>
+                            <p><%= bugs[i].location %></p>
+                            <% if (bugs[i].time === '') { %>
+                                <p>All day</p>
+                            <% } else { %>
+                                <p><%= bugs[i].time %></p>
+                            <% } %>                            
+                        </div>
+                    </div>
+                </a>
+            </div>
+        <% } %>   
+    </div>  
+</div>
+
+<%- include('partials/footer') %>
