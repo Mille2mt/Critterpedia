@@ -30,13 +30,59 @@
     </div>   
 </div> -->
 
-    <div class="container">
-        <h2 class="text-center">Critters leaving this month</h2>
-        <br/>
-        <% for (let i = 0; i < thisMonthFish.length; i++) { %>
-            <p><%= thisMonthFish[i].name %> </p>
-        <% } %>
+<h3 class='text-center'>Critters leaving this month</h3>
+
+<div class="container card-holder">
+    <div class="row" style='flex-wrap:wrap;'>
+        <% (Object.values(leavingCritters)).forEach((type) => { %>
+            <% for (let i = 0; i < type.length; i++) { %>
+                <div class="col-xl-3 col-md-4 col-6">
+                    <div class="card text-center">
+                        <h5 class='card-title'><%= type[i].name.charAt(0).toUpperCase() + type[i].name.slice(1).replace(/_/g, ' ') %></h5>
+                        <div class="card-body">
+                            <img src="<%= type[i].icon %>" alt="card-img-top">
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><%= type[i].location %></li>
+                            <li class="list-group-item"><%= type[i].time === '' ? 'All Day' : type[i].time %></li>
+                            <li class="list-group-item"><%= type[i].price %> bells</li>
+                        </ul>
+                    </div>
+                </div>
+            <% } %>
+        <% }) %>
     </div>
+</div>
+
+<h3 class='text-center'>New Critters this month</h3>
+
+<div class="container card-holder">
+    <div class="row" style='flex-wrap:wrap;'>
+        <% (Object.values(newCritters)).forEach((type) => { %>
+            <% for (let i = 0; i < type.length; i++) { %>
+                <div class="col-xl-3 col-md-4 col-6">
+                    <div class="card text-center">
+                        <h5 class='card-title'><%= type[i].name.charAt(0).toUpperCase() + type[i].name.slice(1).replace(/_/g, ' ') %></h5>
+                        <div class="card-body">
+                            <img src="<%= type[i].icon %>" alt="card-img-top">
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><%= type[i].location %></li>
+                            <li class="list-group-item"><%= type[i].time === '' ? 'All Day' : type[i].time %></li>
+                            <li class="list-group-item"><%= type[i].price %> bells</li>
+                        </ul>
+                    </div>
+                </div>
+            <% } %>
+        <% }) %>
+    </div>
+</div>
+
+
+
+
+
+
 
 
 

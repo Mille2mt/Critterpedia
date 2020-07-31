@@ -38,27 +38,4 @@
 </div>
 
 
-<div class="container">
-    <div class='row' style='flex-wrap:wrap;'>
-        <% for (let i = 0; i < seaCreatures.length; i++) { %>
-            <div class="col-md-3 col-sm-6">
-                <a href="/critters/seaCreatures/<%= seaCreatures[i].name %>">
-                    <div class="thumbnail">
-                        <img src="<%= seaCreatures[i].icon %>" alt="Icon">
-                        <div class="caption text-center">
-                            <h4><%= seaCreatures[i].name.charAt(0).toUpperCase() + seaCreatures[i].name.slice(1).replace('_', ' ') %></h4>
-                            <p><%= seaCreatures[i].location %></p>
-                            <% if (seaCreatures[i].time === '') { %>
-                                <p>All day</p>
-                            <% } else { %>
-                                <p><%= seaCreatures[i].time %></p>
-                            <% } %>                            
-                        </div>
-                    </div>
-                </a>
-            </div>
-        <% } %>   
-    </div>  
-</div>
-
 <%- include('partials/footer') %>

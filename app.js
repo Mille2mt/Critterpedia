@@ -2,6 +2,9 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const SeaCreature = require('./models/SeaCreature');
+const Fish = require('./models/Fish');
+const Bugs = require('./models/Bugs');
 
 //App config
 
@@ -16,77 +19,43 @@ const lastMonth = today.getMonth();
 const thisMonth = today.getMonth() + 1;
 const nextMonth = today.getMonth() + 2;
 
-//Collection schemas
-
-const fishSchema = new mongoose.Schema({
-    name: String,
-    cphrase: String,
-    mphrase: String,
-    icon: String,
-    rarity: String,
-    price: Number,
-    sprice: Number,
-    location: String,
-    time: String,
-    shadowSize: String,
-    fishMonthsNorth: Array,
-    fishMonthsSouth: Array
-});
-
-const bugSchema = new mongoose.Schema({
-    name: String,
-    cphrase: String,
-    mphrase: String,
-    icon: String,
-    image: String,
-    rarity: String,
-    price: String,
-    sprice: String,
-    location: String,
-    time: String,
-    bugMonthsNorth: Array,
-    bugMonthsSouth: Array
-});
-
-const seaCreatureSchema = new mongoose.Schema({
-    name: String,
-    cphrase: String,
-    mphrase: String,
-    icon: String,
-    image: String,
-    price: String,
-    location: String,
-    time: String,
-    seaMonthsNorth: Array,
-    seaMonthsSouth: Array,
-    shadow: String,
-    speed: String
-});
-
-const SeaCreature = mongoose.model('Sea Creature', seaCreatureSchema);
-
-const Bugs = mongoose.model('Bug', bugSchema);
-
-const Fish = mongoose.model('Fish', fishSchema);
-
-
 //Routes
 
 app.get('/', (req, res) => {
     res.render('landing');
 });
 
-app.get('/critters', (req, res) => {
-    let query = {$and: [{fishMonthsNorth: thisMonth}, {fishMonthsNorth: {$ne: nextMonth}}]}
-    
+app.get('/critters', async (req, res) => {
+    try {
+        let leavingCritters = {};
+        let newCritters = {};
+        const leavingFishQuery = {$and: [{fishMonthsNorth: thisMonth}, {fishMonthsNorth: {$ne: nextMonth}}]}
+        const leavingBugsQuery = {$and: [{bugsMonthsNorth: thisMonth}, {bugsMonthsNorth: {$ne: nextMonth}}]}
+        const leavingSeaQuery = {$and: [{seaMonthsNorth: thisMonth}, {seaMonthsNorth: {$ne: nextMonth}}]}
+        const newFishQuery = {$and: [{fishMonthsNorth: lastMonth}, {fishMonthsNorth: {$ne: thisMonth}}]}
+        const newBugsQuery = {$and: [{bugsMonthsNorth: lastMonth}, {bugsMonthsNorth: {$ne: thisMonth}}]}
+        const newSeaQuery = {$and: [{seaMonthsNorth: lastMonth}, {seaMonthsNorth: {$ne: thisMonth}}]}
 
-    Fish.find(query, (err, thisMonthFish) => {
-        if (err) { 
-            console.log(err);
-        } else {
-            res.render('index', {thisMonthFish : thisMonthFish});
-        }
-    }); 
+        await Promise.allSettled([
+            Fish.find(leavingFishQuery)
+            .then(docs => { Object.assign(leavingCritters, {fish : docs})}),
+            Bugs.find(leavingBugsQuery)
+            .then(docs => { Object.assign(leavingCritters, {bugs : docs})}),
+            SeaCreature.find(leavingSeaQuery)
+            .then(docs => { Object.assign(leavingCritters, {sea : docs})}),
+            Fish.find(newFishQuery)
+            .then(docs => { Object.assign(newCritters, {fish : docs})}),
+            Bugs.find(newBugsQuery)
+            .then(docs => { Object.assign(newCritters, {bugs : docs})}),
+            SeaCreature.find(newSeaQuery)
+            .then(docs => { Object.assign(newCritters, {sea : docs})})                    
+        ]); 
+        
+        await res.render('index', {leavingCritters : leavingCritters, newCritters : newCritters});
+        
+    } catch (e) {
+        await res.status(404).json(e);
+    }       
 });
 
 
@@ -148,3 +117,16 @@ app.get('/critters/seaCreatures/', (req, res) => {
 app.listen(3000, () => {
     console.log('Critterpedia served on port 3000');
 });
+
+
+// WORKING FISH QUERY FOR MONTHLY LEAVING FISH
+// let query = {$and: [{fishMonthsNorth: thisMonth}, {fishMonthsNorth: {$ne: nextMonth}}]}
+    
+
+//     Fish.find(query, (err, thisMonthFish) => {
+//         if (err) { 
+//             console.log(err);
+//         } else {
+//             res.render('index', {thisMonthFish : thisMonthFish});
+//         }
+//     }); 
