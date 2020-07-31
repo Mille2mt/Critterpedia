@@ -5,27 +5,41 @@
     <a href="/critters" class="btn btn-primary btn-md">Go back</a>
 </div>
 
-<div class="container">
+<div class="container mb-3">
+    <div class="row justify-content-around">
+        <form class='col-4 text-center formButton' action="/critters/bugs?sortby=name" method='GET'>
+            <button class='button p-2' type='hidden' name='sortby' value='name'>Sort by name</button>
+        </form>
+        <form class='col-4 text-center' action="/critters/bugs?sortby=location" method='GET'>
+            <button class='button p-2' type='hidden' name='sortby' value='location'>Sort by location</button>
+        </form>
+        <form class='col-4 text-center' action="/critters/bugs?sortby=price" method='GET'>
+            <button class='button p-2' type='hidden' name='sortby' value='price'>Sort by price</button>
+        </form>
+    </div>
+</div>
+
+<div class="container card-holder">
     <div class='row' style='flex-wrap:wrap;'>
         <% for (let i = 0; i < bugs.length; i++) { %>
-            <div class="col-md-3 col-sm-6">
-                <a href="/critters/bugs/<%= bugs[i].name %>">
-                    <div class="thumbnail">
-                        <img src="<%= bugs[i].icon %>" alt="Icon">
-                        <div class="caption text-center">
-                            <h4><%= bugs[i].name.charAt(0).toUpperCase() + bugs[i].name.slice(1).replace('_', ' ') %></h4>
-                            <p><%= bugs[i].location %></p>
-                            <% if (bugs[i].time === '') { %>
-                                <p>All day</p>
-                            <% } else { %>
-                                <p><%= bugs[i].time %></p>
-                            <% } %>                            
+            <div class="col-xl-3 col-md-4 col-6">
+                <a class='text-decoration-none' href="/critters/bugs/<%= bugs[i].name %>">
+                    <div class="card text-center">
+                        <h5 class="card-title"><%= bugs[i].name.charAt(0).toUpperCase() + bugs[i].name.slice(1).replace(/_/g, ' ') %></h5>                        
+                        <div class="card-body">
+                            <img src="<%= bugs[i].icon %>" class="card-img-top" alt="...">
                         </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><%= bugs[i].location %></li>
+                            <li class="list-group-item"><%= bugs[i].time === '' ? 'All Day' : bugs[i].time %></li>
+                            <li class="list-group-item"><%= bugs[i].price %> bells</li>
+                        </ul>
                     </div>
                 </a>
             </div>
         <% } %>   
     </div>  
 </div>
+
 
 <%- include('partials/footer') %>

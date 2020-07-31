@@ -1,20 +1,20 @@
 <%- include('partials/header') %>
 
 <div class="container">
-    <header class="jumbotron">
+    <header class="jumbotron mb-2">
         <div class="container">
-            <h1>Welcome to our Critters page!</h1>
+            <h1>Welcome to our Critters Home!</h1>
             <p>View our lovely selection of bugs and fish!</p>            
             <a href="/">Go back.</a> 
         </div>               
     </header>
 </div>
 
-<div class="container mb-5">
+<div class="container mb-1">
     <div class="row justify-content-around">
-        <a href="/critters/fish" class='col-md-3'><button class='btn btn-primary btn-lg selector'>Fish</button></a>   
-        <a href="/critters/bugs" class='col-md-3'><button class='btn btn-success btn-lg selector'>Bugs</button></a>   
-        <a href="/critters/seaCreatures" class='col-md-3'><button class='btn btn-info btn-lg selector'>Sea</button></a>    
+        <a href="/critters/fish" class='col-md-3 mb-2'><button class='btn btn-primary btn-lg selector'>Fish</button></a>   
+        <a href="/critters/bugs" class='col-md-3 mb-2'><button class='btn btn-success btn-lg selector'>Bugs</button></a>   
+        <a href="/critters/seaCreatures" class='col-md-3 mb-2'><button class='btn btn-info btn-lg selector'>Sea</button></a>    
     </div>
 </div>
 
@@ -32,16 +32,12 @@
 
     <div class="container">
         <h2 class="text-center">Critters leaving this month</h2>
-        <h4>Bugs</h4>
-        <h4>Fish</h4>
-        <h4>Sea Creatures</h4>
+        <br/>
+        <% for (let i = 0; i < thisMonthFish.length; i++) { %>
+            <p><%= thisMonthFish[i].name %> </p>
+        <% } %>
     </div>
 
-    <div class="container">
-        <h2 class="text-center">New Critters this month</h2>
-        <h4>Bugs</h4>
-        <h4>Fish</h4>
-        <h4>Sea Creatures</h4>
-    </div>
+
 
 <%- include('partials/footer') %>

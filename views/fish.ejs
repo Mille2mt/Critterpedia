@@ -5,10 +5,26 @@
     <a href="/critters" class="btn btn-primary btn-md">Go back</a>
 </div>
 
+<div class="container mb-3">
+    <div class="row justify-content-around">
+        <form class='col-4 text-center formButton' action="/critters/fish?sortby=name" method='GET'>
+            <button class='button p-2' type='hidden' name='sortby' value='name'>Sort by name</button>
+        </form>
+        <form class='col-4 text-center' action="/critters/fish?sortby=location" method='GET'>
+            <button class='button p-2' type='hidden' name='sortby' value='location'>Sort by location</button>
+        </form>
+        <form class='col-4 text-center' action="/critters/fish?sortby=price" method='GET'>
+            <button class='button p-2' type='hidden' name='sortby' value='price'>Sort by price</button>
+        </form>
+    </div>
+</div>
+       
+
+
 <div class="container card-holder">
     <div class='row' style='flex-wrap:wrap;'>
         <% for (let i = 0; i < fish.length; i++) { %>
-            <div class="col-md-3 col-sm-6">
+            <div class="col-xl-3 col-md-4 col-6">
                 <a class='text-decoration-none' href="/critters/fish/<%= fish[i].name %>">
                     <div class="card text-center">
                         <h5 class="card-title"><%= fish[i].name.charAt(0).toUpperCase() + fish[i].name.slice(1).replace('_', ' ') %></h5>                        
@@ -18,6 +34,7 @@
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item"><%= fish[i].location %></li>
                             <li class="list-group-item"><%= fish[i].time === '' ? 'All Day' : fish[i].time %></li>
+                            <li class="list-group-item"><%= fish[i].price %> bells</li>
                         </ul>
                     </div>
                 </a>

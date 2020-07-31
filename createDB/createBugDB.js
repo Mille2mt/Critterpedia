@@ -15,8 +15,8 @@ const bugSchema = new mongoose.Schema({
     icon: String,
     image: String,
     rarity: String,
-    price: String,
-    sprice: String,
+    price: Number,
+    sprice: Number,
     location: String,
     time: String,
     bugMonthsNorth: Array,
@@ -38,8 +38,8 @@ axios.get('https://acnhapi.com/v1/bugs/')
         const bugIcon = values[i]['icon_uri'];
         const bugImage = values[i]['image_uri'];
         const bugRarity = values[i].availability.rarity;
-        const bugPrice = values[i]['price']; //turn to string using .toString()
-        const bugSpecPrice = values[i]['price-cj']; //turn to string .toString()
+        const bugPrice = parseInt(values[i]['price']); //turn to string using .toString()
+        const bugSpecPrice = parseInt(values[i]['price-cj']); //turn to string .toString()
         const bugLocation = values[i].availability.location;
         const bugTime = values[i].availability.time; //if string empty do something
         const bugMonthsNorth = values[i].availability['month-array-northern'];

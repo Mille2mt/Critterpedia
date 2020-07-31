@@ -14,12 +14,11 @@ const seaCreatureSchema = new mongoose.Schema({
     mphrase: String,
     icon: String,
     image: String,
-    rarity: String,
-    price: String,
+    price: Number,
     location: String,
     time: String,
-    bugMonthsNorth: Array,
-    bugMonthsSouth: Array,
+    seaMonthsNorth: Array,
+    seaMonthsSouth: Array,
     shadow: String,
     speed: String
 });
@@ -38,10 +37,9 @@ axios.get('https://acnhapi.com/v1/sea/')
         const seaCreatureMPhrase = values[i]['museum-phrase'];
         const seaCreatureIcon = values[i]['icon_uri'];
         const seaCreatureImage = values[i]['image_uri'];
-        const seaCreatureRarity = values[i].availability.rarity;
-        const seaCreaturePrice = values[i]['price']; //turn to string using .toString()
+        const seaCreaturePrice = parseInt(values[i]['price']);
         const seaCreatureLocation = values[i].availability.location;
-        const seaCreatureTime = values[i].availability.time; //if string empty do something
+        const seaCreatureTime = values[i].availability.time;
         const seaCreatureMonthsNorth = values[i].availability['month-array-northern'];
         const seaCreatureMonthsSouth = values[i].availability['month-array-southern'];
         const seaCreatureShadowSize = values[i].shadow;
@@ -52,13 +50,12 @@ axios.get('https://acnhapi.com/v1/sea/')
             cphrase: seaCreatureCPhrase,
             mphrase: seaCreatureMPhrase,
             icon: seaCreatureIcon,
-            image: seaCreatureImage,                
-            rarity: seaCreatureRarity,
+            image: seaCreatureImage,   
             price: seaCreaturePrice,
             location: seaCreatureLocation,
             time: seaCreatureTime,
-            monthsNorth: seaCreatureMonthsNorth,
-            monthsSouth: seaCreatureMonthsSouth,
+            seaMonthsNorth: seaCreatureMonthsNorth,
+            seaMonthsSouth: seaCreatureMonthsSouth,
             shadowSize: seaCreatureShadowSize,
             speed: seaCreatureSpeed
         }, (err, seaCreature) => {

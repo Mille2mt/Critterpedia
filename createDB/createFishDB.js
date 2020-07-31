@@ -14,11 +14,12 @@ const fishSchema = new mongoose.Schema({
     mphrase: String,
     icon: String,
     rarity: String,
-    price: String,
-    sprice: String,
+    price: Number,
+    sprice: Number,
     location: String,
-    time: String,
-    months: String,
+    time: String,    
+    fishMonthsNorth: Array,
+    fishMonthsSouth: Array,
     shadowSize: String
 });
 
@@ -37,14 +38,14 @@ axios.get('https://acnhapi.com/v1/fish/')
         const fishIcon = values[i]['icon_uri'];
         const fishImage = values[i]['image_uri'];
         const fishRarity = values[i].availability.rarity;
-        const fishPrice = values[i]['price']; //turn to string using .toString()
-        const fishSpecPrice = values[i]['price-cj']; //turn to string .toString()
+        const fishPrice = parseInt(values[i]['price']); //turn to string using .toString()
+        const fishSpecPrice = parseInt(values[i]['price-cj']); //turn to string .toString()
         const fishLocation = values[i].availability.location;
         const fishTime = values[i].availability.time; //if string empty do something
         const fishMonthsNorth = values[i].availability['month-array-northern'];
         const fishMonthsSouth = values[i].availability['month-array-southern'];
         const fishShadowSize = values[i].shadow;
-
+        
         Fish.create({
             name: fishName,
             cphrase: fishCPhrase,
@@ -56,8 +57,8 @@ axios.get('https://acnhapi.com/v1/fish/')
             specprice: fishSpecPrice,
             location: fishLocation,
             time: fishTime,
-            monthsNorth: fishMonthsNorth,
-            monthsSouth: fishMonthsSouth,
+            fishMonthsNorth: fishMonthsNorth,
+            fishMonthsSouth: fishMonthsSouth,
             shadowSize: fishShadowSize
         }, (err, fish) => {
             if (err) {
