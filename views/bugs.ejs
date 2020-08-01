@@ -24,7 +24,7 @@
     <div class='row' style='flex-wrap:wrap;'>
         <% for (let i = 0; i < bugs.length; i++) { %>
             <div class="col-xl-3 col-md-4 col-6">
-                <a class='text-decoration-none' href="/critters/bugs/<%= bugs[i].name %>">
+                <a class='text-decoration-none' href="/critters/<%= bugs[i].name %>">
                     <div class="card text-center">
                         <h5 class="card-title"><%= bugs[i].name.charAt(0).toUpperCase() + bugs[i].name.slice(1).replace(/_/g, ' ') %></h5>                        
                         <div class="card-body">
