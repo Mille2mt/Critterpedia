@@ -118,15 +118,3 @@ app.listen(3000, () => {
     console.log('Critterpedia served on port 3000');
 });
 
-
-// WORKING FISH QUERY FOR MONTHLY LEAVING FISH
-// let query = {$and: [{fishMonthsNorth: thisMonth}, {fishMonthsNorth: {$ne: nextMonth}}]}
-    
-
-//     Fish.find(query, (err, thisMonthFish) => {
-//         if (err) { 
-//             console.log(err);
-//         } else {
-//             res.render('index', {thisMonthFish : thisMonthFish});
-//         }
-//     }); 

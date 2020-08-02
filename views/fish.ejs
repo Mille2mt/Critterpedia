@@ -7,6 +7,35 @@
 
 <div class="container mb-3">
     <div class="row justify-content-around">
+        <div class="col-4 col-lg-2 text-center">   
+            <img src="../assets/Smallest.png" alt="Smallest fish">
+            <p>(1) Smallest</p>
+        </div>
+        <div class="col-4 col-lg-2 text-center">   
+            <img src="../assets/Small.png" alt="Small fish">
+            <p>(2) Small</p>
+        </div>
+        <div class="col-4 col-lg-2 text-center">   
+            <img src="../assets/MediumSmall.png" alt="Medium small fish">
+            <p>(3/4) Medium</p>
+        </div>
+        <div class="col-4 col-lg-2 text-center">   
+            <img src="../assets/Large.png" alt="Large fish">
+            <p>(5) Large</p>
+        </div>
+        <div class="col-4 col-lg-2 text-center">   
+            <img src="../assets/Huge.png" alt="Huge fish">
+            <p>(6) Huge</p>
+        </div>
+        <div class="col-4 col-lg-2 text-center">   
+            <img src="../assets/withFin.png" alt="Fish with fin">
+            <p>(s.) With fin</p>
+        </div>    
+    </div>
+</div>  
+
+<div class="container mb-3">
+    <div class="row justify-content-around">
         <form class='col-4 text-center formButton' action="/critters/fish?sortby=name" method='GET'>
             <button class='button p-2' type='hidden' name='sortby' value='name'>Sort by name</button>
         </form>
@@ -17,9 +46,7 @@
             <button class='button p-2' type='hidden' name='sortby' value='price'>Sort by price</button>
         </form>
     </div>
-</div>
-       
-
+</div>    
 
 <div class="container card-holder">
     <div class='row' style='flex-wrap:wrap;'>
@@ -35,6 +62,7 @@
                             <li class="list-group-item"><%= fish[i].location %></li>
                             <li class="list-group-item"><%= fish[i].time === '' ? 'All Day' : fish[i].time %></li>
                             <li class="list-group-item"><%= fish[i].price %> bells</li>
+                            <li class="list-group-item"><%= fish[i].shadowSize %></li>
                         </ul>
                     </div>
                 </a>
